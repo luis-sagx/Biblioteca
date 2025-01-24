@@ -1,5 +1,5 @@
-class Libro{
-    constructor(id, titulo, autor, genero){
+class Libro {
+    constructor(id, titulo, autor, genero) {
         this.id = id;
         this.titulo = titulo;
         this.autor = autor;
@@ -147,6 +147,15 @@ function confirmarAccion(tipo, libro) {
     }
 }
 
+
+function mostrarNotificacion(mensaje) {
+    const notificacion = document.getElementById("notificaciones");
+    notificacion.textContent = mensaje;
+
+    setTimeout(() => {
+        notificacion.textContent = "";
+    }, 10000);
+}
 
 (function iniciarSistema() {
     const iniciar = document.getElementById("filtro")
