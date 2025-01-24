@@ -19,8 +19,8 @@ Para poder trabajar con elemento de buscada y filtrado de libros; tenemos de igu
 Usamos la integracion con DOOM al momento por ejemplo de realizar la notificacion; puesto que nosotros capturamos el contenedor que almacenara las notifiaciones breves (id=notificicaicones); para luego escribir o agregar texto (el mensaje) que hemos ya establecido con las otras funciones
 De igual al captura la barra de busqueda y los valores que contiene la misma.
 
-
-
+## Criterio 4
+Se usa la funcion inciarRecordatorio donde se utiliza el setIntervalue
 
 
 ## Criterio de las Notifiaciones
