@@ -1,11 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Gestión de Biblioteca</title>
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
+
 <body>
-    <h1>Ola mundo</h1>
+
+
+    <header>
+        <h1>Gestión de Biblioteca Digital</h1>
+    </header>
+
+    <div class="principal">
+        <div>
+            <section>
+                <h2>Buscar Libro</h2>
+            <input type="text" id="filtro" placeholder="Buscar libros por título, autor o género">
+        </section>
+
+        
+            <section>
+            <h2>Libros Disponibles</h2>
+            
+                <div id="librosDisponibles">
+                    <button>Prestar</button>
+                </div>
+            </section>
+            <section>
+                <h2>Libros Prestados</h2>
+                <div id="librosPrestados"></div>
+            </section>
+
+
+        </div>
+        <aside>
+            <h2> Notificaciones</h2>
+            <div id="notificaciones" style="position: fixed; top: 10px; right: 10px; width: 300px; z-index: 1000;">
+        </aside>
+
+
+
+    </div>
+
+    <script src="./js/script.js"></script>
 </body>
+
 </html>
