@@ -35,7 +35,7 @@ function mostrarLibros() {
     for (let i = 0; i < librosDisponibles.length; i++) {
         const libro = librosDisponibles[i];
         const libroDiv = document.createElement("div");
-        libroDiv.textContent = `Libro: ${libro.titulo} - ${libro.autor}. Genero: ${libro.genero}`;
+        libroDiv.textContent = `Libro-> ${libro.titulo} - ${libro.autor} - Genero: ${libro.genero}`;
         const botonPrestar = document.createElement("button");
         botonPrestar.textContent = "Prestar";
         botonPrestar.addEventListener('click', (() => {
@@ -109,7 +109,7 @@ function filtrarLibros() {
     for (let i = 0; i < resultados.length; i++) {
         const libro = resultados[i];
         const libroDiv = document.createElement("div");
-        libroDiv.textContent = `Libro: ${libro.titulo} - ${libro.autor}. Genero: ${libro.genero}    `;
+        libroDiv.textContent = `Libro-> ${libro.titulo} - ${libro.autor} - Genero: ${libro.genero}`;
         const botonPrestar = document.createElement("button");
         botonPrestar.textContent = "Prestar";
         botonPrestar.addEventListener('click', (() => {
@@ -147,6 +147,11 @@ function confirmarAccion(tipo, libro) {
     }
 }
 
+function calcularFechaDevolucion() {
+    const fechaActual = new Date();
+    fechaActual.setDate(fechaActual.getDate() + 2);
+    return fechaActual.toLocaleDateString();
+}
 
 function mostrarNotificacion(mensaje) {
     const notificacion = document.getElementById("notificaciones");
@@ -157,8 +162,21 @@ function mostrarNotificacion(mensaje) {
     }, 10000);
 }
 
+function iniciarRecordatorios() {
+    setInterval(() => {
+      const hoy = new Date().toLocaleDateString();
+      for (let i = 0; i < librosPrestados.length; i++) {
+        const libro = librosPrestados[i];
+        if (libro.fechaDevolucion === hoy) {
+          alert(`El libro "${libro.titulo}" debe ser devuelto hoy.`);
+        }
+      }
+    }, 60000); 
+}
+
 (function iniciarSistema() {
     const iniciar = document.getElementById("filtro")
     iniciar.addEventListener("input", filtrarLibros);
+    iniciarRecordatorios();
     mostrarLibros();
 })();
