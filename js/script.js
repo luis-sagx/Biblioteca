@@ -42,6 +42,10 @@ function mostrarLibros() {
             prestarLibro(libro.id)
         }));
 
+        botonPrestar.addEventListener('mouseover', resaltarBoton);
+        botonPrestar.addEventListener('mouseout', restaurarBoton);
+        
+
         libroDiv.appendChild(botonPrestar);
         disponiblesDiv.appendChild(libroDiv);
     }
@@ -88,6 +92,27 @@ function devolverLibro(id) {
     alert(`El libro con ID ${id} no se encontró entre los prestados.`);
 }
 
+function reservarLibro(id, usuario) {
+    const libro = librosDisponibles.find((libro) => libro.id === id);
+    if (libro) {
+      reservas.push({ usuario, libro: libro.titulo, reservado: true, notificado: false });
+      confirmarAccion("reserva", libro.titulo);
+    }
+}
+
+function notificarDisponibilidad() {
+    for (let i = 0; i < reservas.length; i++) {
+      const reserva = reservas[i];
+      if (reserva.reservado && !reserva.notificado) {
+        const libro = librosDisponibles.find((l) => l.titulo === reserva.libro && l.disponible);
+        if (libro) {
+          mostrarNotificacion(`El libro "${libro.titulo}" está disponible para ${reserva.usuario}.`);
+          reserva.notificado = true;
+        }
+      }
+    }
+}
+
 function filtrarLibros() {
     const criterio = document.getElementById("filtro").value.toLowerCase();
     const resultados = [];
@@ -115,6 +140,9 @@ function filtrarLibros() {
         botonPrestar.addEventListener('click', (() => {
             prestarLibro(libro.id)
         }));
+
+        botonPrestar.addEventListener('mouseover', resaltarBoton);
+        botonPrestar.addEventListener('mouseout', restaurarBoton);
 
         libroDiv.appendChild(botonPrestar);
         disponiblesDiv.appendChild(libroDiv);
@@ -168,10 +196,18 @@ function iniciarRecordatorios() {
       for (let i = 0; i < librosPrestados.length; i++) {
         const libro = librosPrestados[i];
         if (libro.fechaDevolucion === hoy) {
-          alert(`El libro "${libro.titulo}" debe ser devuelto hoy.`);
+            mostrarNotificacion(`El libro "${libro.titulo}" debe ser devuelto hoy.`);
         }
       }
     }, 60000); 
+}
+
+function resaltarBoton(evento) {
+    evento.target.style.backgroundColor = "pink"; 
+}
+
+function restaurarBoton(evento) {
+    evento.target.style.backgroundColor = ""; 
 }
 
 (function iniciarSistema() {
